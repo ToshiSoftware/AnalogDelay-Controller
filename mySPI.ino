@@ -242,7 +242,7 @@ unsigned char Get7SegSerialData(int digit, int dot) {
 
   // anode comon: '~' is required
   if (dot) {
-    sdValue = ~seg7Value[digit] | 0x80;
+    sdValue = ~seg7Value[digit] & 0x7F;
   } else {
     sdValue = ~seg7Value[digit];
   }
