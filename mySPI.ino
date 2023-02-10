@@ -1,6 +1,6 @@
 #include "mySPI.h"
 
-
+// init HC165
 void SetupReadHC165(void) {
   pinMode(SRD_SDI, INPUT);
   pinMode(SRD_CS, OUTPUT);
@@ -11,6 +11,7 @@ void SetupReadHC165(void) {
   digitalWrite(SRD_CS, LOW);
 }
 
+// read HC165 to get button and encoder operation
 // launch as an interruppted function
 void ReadHC165(void) {
   int i;
@@ -51,7 +52,7 @@ void ReadHC165(void) {
   HandleEncoder();
 }
 
-
+// init sdi related variables
 void SetupParseSdiData(void) {
   int i;
   // sw
@@ -74,6 +75,7 @@ void SetupParseSdiData(void) {
   }
 }
 
+// convert read data from hc165 to app parameters
 void ParseSdiData(void) {
 
   // set sw data
@@ -98,6 +100,7 @@ void ParseSdiData(void) {
 }
 
 /* -------------------------------------------------------------------
+<how to handle tact SWs to recognize short or long press of buttons>
                          a      b    c  d    e              f
                     -------------------->2sec----------------------
 Long Press          ~~~~~|__________________________________|~~~~~~
@@ -117,6 +120,7 @@ e)callback func disables 'trigger_shortpress'
 f)button up
 ------------------------------------------------------------------- */
 
+// handle tact SWs
 void HandleSw(void) {
   int i;
   for (i = 0; i < NUM_SW; i++) {
@@ -174,8 +178,8 @@ void HandleSw(void) {
     }
 }
 
-// Rotary encoder
-// https://sheep-me.me/2019/12/05/geidai_21/
+// handle rotary encoder
+// reference: https://sheep-me.me/2019/12/05/geidai_21/
 int cw[] = {1, 3, 0, 2};
 int ccw[] = {2, 0, 3, 1};
 
@@ -213,7 +217,7 @@ void HandleEncoder(void) {
 
 }
 
-
+// 7-seg led: segment mapping data
 unsigned char seg7Value[] = {
   // GFEDCBA
     0x3F,
@@ -234,6 +238,7 @@ unsigned char seg7Value[] = {
     0x71
 };
 
+// convert display number to serial data with dot handling
 unsigned char Get7SegSerialData(int digit, int dot) {
   unsigned char sdValue = 0;
 
