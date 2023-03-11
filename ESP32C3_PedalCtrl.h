@@ -105,6 +105,9 @@
 
 #define LEN_DEBUG_MESSAGE 1024
 
+// delay time step
+#define UI_DELAYTIME_STEP 5
+
 typedef struct {
   int onoff;
   int effect;

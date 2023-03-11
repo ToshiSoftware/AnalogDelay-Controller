@@ -101,11 +101,18 @@ void CheckAndCorrectPreset(void){
   for(i=0; i<NUM_PRESET; i++)
   {
     if(presetParams[i].effect<0) presetParams[i].effect=0;
-    if(presetParams[i].feedback<0) presetParams[i].feedback=0;
-    if(presetParams[i].time<0) presetParams[i].time=0;
     if(presetParams[i].effect>99) presetParams[i].effect=99;
+    if(presetParams[i].feedback<0) presetParams[i].feedback=0;
     if(presetParams[i].feedback>99) presetParams[i].feedback=99;
+#ifdef PT2399
+    if(presetParams[i].time<0) presetParams[i].time=0;
     if(presetParams[i].time>99) presetParams[i].time=99;
+#else
+    presetParams[i].time/=UI_DELAYTIME_STEP;
+    presetParams[i].time*=UI_DELAYTIME_STEP;
+    if(presetParams[i].time<50) presetParams[i].time=50;
+    if(presetParams[i].time>600) presetParams[i].time=600;
+#endif
   }  
 }
 
@@ -255,11 +262,15 @@ void LoadPresetToCurrentParam(int prst_no)
   appVars.tempo_target_msec = GetTempoTargetDelayTime(appParam.time);
 
   // mute effect & feedback while 
-  appVars.mute_counter = GetTempoTargetDelayTime(appParam.time) * 1.1;
+  appVars.mute_counter = GetTempoTargetDelayTime(appParam.time) * 1.5;
   appVars.mute_flag = true;
 }
 
 int GetTempoTargetDelayTime(int appTime)
 {
+#ifdef PT2399
   return (DELAY_TIME_MAX-DELAY_TIME_MIN)*appTime/99+DELAY_TIME_MIN;
+#else
+  return appTime;
+#endif
 }

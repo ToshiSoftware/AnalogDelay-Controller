@@ -69,6 +69,7 @@ extern void HandleSw(void);
 extern void HandleEncoder(void);
 extern unsigned char Get7SegSerialData(int digit, int dot);
 extern void SendMyHC595Serial(int mute);
+extern int GetBbdDelayActualStep(int time);
 
 extern Type_InputManage sdi;
 extern Type_HC165Manage hc165;

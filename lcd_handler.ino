@@ -9,12 +9,21 @@ void UpdateEntireLcdDisplay(void){
         // name
         lcd.noBlink();
         lcd.setCursor(0, 0);
+#ifdef PT2399
         lcd.print("EFC FBK TIM msec");
+#else
+        lcd.print("EFC FBK TIME(ms)");
+#endif
         // params
         PrintInt2Digit(appParam.effect, 1,1);
         PrintInt2Digit(appParam.feedback, 5,1);
+#ifdef PT2399
         PrintInt2Digit(appParam.time, 9,1);
         PrintInt3Digit(appVars.tempo_target_msec, 13,1);
+#else
+        PrintInt3Digit(appParam.time, 9,1);
+        // PrintInt3Digit(GetBbdDelayActualStep(appParam.time), 13, 1); // show AD8304 step data
+#endif
 
         // '>' cursor 
         switch(appVars.selected_knob){

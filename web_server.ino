@@ -67,12 +67,27 @@ void handleSetVol(void) {
               if(index>=0 && index<=9)
               {
                 int value = httpServer.arg(i).toInt();
+#ifdef PT2399
                 if( value>=0 && value<=99){
                   if(name[0]=='e') presetParams[index].effect = value;
                   else if(name[0]=='f') presetParams[index].feedback = value;
                   else if(name[0]=='t') presetParams[index].time = value;
                   changeCount++;
                 }
+#else
+                if(name[0]=='e' && value>=0 && value<=99) {
+                  presetParams[index].effect = value;
+                  changeCount++;
+                }
+                else if(name[0]=='f' && value>=0 && value<=99) {
+                  presetParams[index].feedback = value;
+                  changeCount++;
+                }
+                else if(name[0]=='t' && value>=50 && value<=600) {
+                  presetParams[index].time = value;
+                  changeCount++;
+                }
+#endif
               }
             }
           }

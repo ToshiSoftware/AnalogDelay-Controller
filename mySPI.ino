@@ -255,6 +255,65 @@ unsigned char Get7SegSerialData(int digit, int dot) {
   return sdValue;
 }
 
+typedef struct{
+  int time, step;
+}Type_DelayStepTable;
+
+#define NUM_STEPTABLE 28
+Type_DelayStepTable table[NUM_STEPTABLE]={
+  {50, 255},
+  {67, 252},
+  {83, 250},
+  {98, 247},
+  {120, 245},
+  
+  {132, 242},
+  {154, 240},
+  {175, 237},
+  {185, 234},
+  {202, 232},
+  
+  {214, 229},
+  {230, 227},
+  {240, 224},
+  {256, 222},
+  {270, 219},
+
+  {277, 216},
+  {288, 214},
+  {299, 211},
+  {309, 209},
+  {316, 206},
+
+  {394, 180},
+  {450, 155},
+  {493, 129},
+  {523, 103},
+  {553, 77},
+
+  {571, 52},
+  {588, 26},
+  {600, 0}
+};
+
+int GetBbdDelayActualStep(int time)
+{
+  // delay time(registance): 50ms(100 kohm)-600ms(0 ohm)
+  int i, ret_step=0;
+  for(i=0; i<NUM_STEPTABLE-1; i++){
+    if(time<table[i].time){
+      ret_step =( (table[i+1].step-table[i].step)
+                 *(time-table[i].time)
+                 /(table[i+1].time-table[i].time) )
+                +table[i].step;
+      if(ret_step<0) ret_step=0;
+      if(ret_step>255) ret_step=255;
+      break;
+    }
+  }
+  return ret_step;
+}
+
 // if mute is true, effect and feedback is set to 0
 void SendMyHC595Serial(int mute)
 {
@@ -276,8 +335,11 @@ void SendMyHC595Serial(int mute)
   // AD8405 step
   step_effect   = 255*appParam.effect/99;
   step_feedback = 255*appParam.feedback/99;
+#ifdef PT2399
   step_time =     127*appParam.time/99;
-
+#else
+  step_time =     GetBbdDelayActualStep(appParam.time);
+#endif
   if(mute==true){
     step_effect   = 0;
     step_feedback = 0;

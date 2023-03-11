@@ -570,18 +570,37 @@ int UiEncoderHandler(void){
       case KNOB_TIME:
         if(sdi.encoder[UI_ENCODER_PARAM].rotation_dir == ROTATION_PLUS){
           sdi.encoder[UI_ENCODER_PARAM].rotation_dir = ROTATION_STOP; // reset rotation_dir
+#ifdef PT2399
           appParam.time++;
           if(appParam.time>99) appParam.time=99;
+#else
+          appParam.time+=UI_DELAYTIME_STEP;
+          appParam.time/=UI_DELAYTIME_STEP;
+          appParam.time*=UI_DELAYTIME_STEP;
+
+          if(appParam.time>600) appParam.time=600;
+#endif
           appVars.preset_changed=true;
           appVars.tempo_target_msec = GetTempoTargetDelayTime(appParam.time);
           ret=true;
         }
         else if(sdi.encoder[UI_ENCODER_PARAM].rotation_dir == ROTATION_MINUS){
           sdi.encoder[UI_ENCODER_PARAM].rotation_dir = ROTATION_STOP; // reset rotation_dir
+#ifdef PT2399
           appParam.time--;
           if(appParam.time<0) appParam.time=0;
+#else
+          appParam.time-=UI_DELAYTIME_STEP;
+          appParam.time/=UI_DELAYTIME_STEP;
+          appParam.time*=UI_DELAYTIME_STEP;
+          if(appParam.time<50) appParam.time=50;
+#endif
           appVars.preset_changed=true;
+#ifdef PT2399
           appVars.tempo_target_msec = GetTempoTargetDelayTime(appParam.time);
+#else
+          appVars.tempo_target_msec = appParam.time;
+#endif
           ret=true;
         }
         break;

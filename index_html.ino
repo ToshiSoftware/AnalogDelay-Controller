@@ -1,7 +1,7 @@
 char index_html1[]=
 "<html>\n\
 <head>\n\
-<title>TEST FORM</title>\n\
+<title>Presettable Analog Delay Editor</title>\n\
 <style type=\"text/css\">\n\
 <!--\n\
 \n\
@@ -12,15 +12,15 @@ html {\n\
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,input,p,blockquote,th,td {\n\
 	margin:0;\n\
 	padding:0;\n\
-	font-family: 'Meiryo',  'sans-serif';\n\
+	font-family: Arial, Helvetica, sans-serif;\n\
 	color: #222222;\n\
 	line-height: 1.5em;\n\
-	font-size:14px;\n\
+	font-size:18px;\n\
 }\n\
 table {\n\
 	border-collapse:collapse;\n\
 	border-spacing:0;\n\
-	font-size:14px;\n\
+	font-size:18px;\n\
 	margin-left:8px;\n\
 	margin-right:8px;\n\
 	margin-top:2px;\n\
@@ -33,7 +33,21 @@ h1 {\n\
 	font-weight: bold;\n\
 	border-bottom: #0068B7 6px solid;\n\
 	clear: both;\n\
-	font-size: 16px;\n\
+	font-size: 20px;\n\
+}\n\
+.btn--orange,\n\
+a.btn--orange {\n\
+  color: #fff;\n\
+  background-color: #eb6100;\n\
+}\n\
+.btn--orange:hover,\n\
+a.btn--orange:hover {\n\
+  color: #fff;\n\
+  background: #f56500;\n\
+}\n\
+\n\
+a.btn--radius {\n\
+   border-radius: 100vh;\n\
 }\n\
 \n\
 -->\n\
@@ -45,7 +59,7 @@ h1 {\n\
 <body>\n\
 \n\
 <div>\n\
-<h1>Noiseless Analog Delay Preset editor V1.00<br>\n\
+<h1>Presettable Analog Delay Editor V2.1<br>\n\
 </h1>\n\
 </div>\n\
   \n\
@@ -54,7 +68,7 @@ h1 {\n\
 \n\
   <table width=\"95%\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">\n\
     <tr>\n\
-      <td width=\"10%\" bgcolor=\"#66CC99\"><div align=\"center\"><strong>Preset No.</strong></div></td>\n\
+      <td width=\"10%\" bgcolor=\"#66CC99\"><div align=\"center\"><strong>Preset</strong></div></td>\n\
       <td width=\"30%\" bgcolor=\"#66CC99\"><div align=\"center\"><strong>Effect</strong></div></td>\n\
       <td width=\"30%\" bgcolor=\"#66CC99\"><div align=\"center\"><strong>Feedback</strong></div></td>\n\
       <td width=\"30%\" bgcolor=\"#66CC99\"><div align=\"center\"><strong>Time</strong></div></td>\n\
@@ -73,7 +87,7 @@ h1 {\n\
       </label></td>\n\
       <td width=\"30%\"><label>\n\
         <div align=\"center\">\n\
-          <input type=\"text\" name=\"t0\" id=\"t0\" style=\"width: 100%;\" maxlength=\"2\">\n\
+          <input type=\"text\" name=\"t0\" id=\"t0\" style=\"width: 100%;\" maxlength=\"3\">\n\
           </div>\n\
       </label></td></td>\n\
     </tr>\n\
@@ -91,7 +105,7 @@ h1 {\n\
       </label></td>\n\
       <td><label>\n\
         <div align=\"center\">\n\
-          <input type=\"text\" name=\"t1\" id=\"t1\" style=\"width: 100%;\" maxlength=\"2\"  >\n\
+          <input type=\"text\" name=\"t1\" id=\"t1\" style=\"width: 100%;\" maxlength=\"3\"  >\n\
           </div>\n\
       </label></td>\n\
       </tr>\n\
@@ -109,7 +123,7 @@ h1 {\n\
       </label></td>\n\
       <td><label>\n\
         <div align=\"center\">\n\
-          <input type=\"text\" name=\"t2\" id=\"t2\" style=\"width: 100%;\" maxlength=\"2\">\n\
+          <input type=\"text\" name=\"t2\" id=\"t2\" style=\"width: 100%;\" maxlength=\"3\">\n\
           </div>\n\
       </label></td>\n\
       </tr>\n\
@@ -127,7 +141,7 @@ h1 {\n\
       </label></td>\n\
       <td><label>\n\
         <div align=\"center\">\n\
-          <input type=\"text\" name=\"t3\" id=\"t3\" style=\"width: 100%;\" maxlength=\"2\">\n\
+          <input type=\"text\" name=\"t3\" id=\"t3\" style=\"width: 100%;\" maxlength=\"3\">\n\
           </div>\n\
       </label></td>\n\
       </tr>\n\
@@ -145,7 +159,7 @@ h1 {\n\
       </label></td>\n\
       <td><label>\n\
         <div align=\"center\">\n\
-          <input type=\"text\" name=\"t4\" id=\"t4\" style=\"width: 100%;\" maxlength=\"2\">\n\
+          <input type=\"text\" name=\"t4\" id=\"t4\" style=\"width: 100%;\" maxlength=\"3\">\n\
           </div>\n\
       </label></td>\n\
       </tr>\n\
@@ -163,7 +177,7 @@ h1 {\n\
       </label></td>\n\
       <td><label>\n\
         <div align=\"center\">\n\
-          <input type=\"text\" name=\"t5\" id=\"t5\" style=\"width: 100%;\" maxlength=\"2\">\n\
+          <input type=\"text\" name=\"t5\" id=\"t5\" style=\"width: 100%;\" maxlength=\"3\">\n\
           </div>\n\
       </label></td>\n\
       </tr>\n\
@@ -181,7 +195,7 @@ h1 {\n\
       </label></td>\n\
       <td><label>\n\
         <div align=\"center\">\n\
-          <input type=\"text\" name=\"t6\" id=\"t6\" style=\"width: 100%;\" maxlength=\"2\">\n\
+          <input type=\"text\" name=\"t6\" id=\"t6\" style=\"width: 100%;\" maxlength=\"3\">\n\
           </div>\n\
       </label></td>\n\
       </tr>\n\
@@ -199,7 +213,7 @@ h1 {\n\
       </label></td>\n\
       <td><label>\n\
         <div align=\"center\">\n\
-          <input type=\"text\" name=\"t7\" id=\"t7\" style=\"width: 100%;\" maxlength=\"2\">\n\
+          <input type=\"text\" name=\"t7\" id=\"t7\" style=\"width: 100%;\" maxlength=\"3\">\n\
           </div>\n\
       </label></td>\n\
       </tr>\n\
@@ -217,7 +231,7 @@ h1 {\n\
       </label></td>\n\
       <td><label>\n\
         <div align=\"center\">\n\
-          <input type=\"text\" name=\"t8\" id=\"t8\" style=\"width: 100%;\" maxlength=\"2\">\n\
+          <input type=\"text\" name=\"t8\" id=\"t8\" style=\"width: 100%;\" maxlength=\"3\">\n\
           </div>\n\
       </label></td>\n\
       </tr>\n\
@@ -235,14 +249,14 @@ h1 {\n\
       </label></td>\n\
       <td><label>\n\
         <div align=\"center\">\n\
-          <input type=\"text\" name=\"t9\" id=\"t9\" style=\"width: 100%;\" maxlength=\"2\">\n\
+          <input type=\"text\" name=\"t9\" id=\"t9\" style=\"width: 100%;\" maxlength=\"3\">\n\
           </div>\n\
       </label></td>\n\
     </tr>\n\
   </table>\n\
 <br>\n\
 \n\
- <p align=\"center\"><input type=\"submit\" name=\"sn\" value=\"Submit preset data\"/></p>\n\
+ <p align=\"center\"><input class=\"btn btn--orange btn--radius\" type=\"submit\" name=\"sn\" value=\"Submit preset data\"/></p>\n\
 <script language=\"javascript\">\n";
 
 

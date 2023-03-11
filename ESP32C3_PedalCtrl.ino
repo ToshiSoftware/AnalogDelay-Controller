@@ -135,7 +135,7 @@ void setup(void) {
   lcd.setContrast(45);
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("NL Analog Delay");
+  lcd.print("Analog Delay 2.1");
 
   lcd.setCursor(0, 1);
   for(int i=0; i<strlen(STARTING_STR); i++){
@@ -272,7 +272,11 @@ void setup(void) {
     appParam.presetNo = 0;
     appParam.effect = 0;
     appParam.feedback = 0;
+  #ifdef PT2399
     appParam.time = 50;
+  #else
+    appParam.time = 300;
+  #endif
   }
   else{
     if(appParam.footsw_mode==FOOTSW_PRESET){
